@@ -1,0 +1,13 @@
+## Interface: 30403
+## Title: |cFFFF0000Testitena|r
+## Author: Túplapukki-PyrewoodVillage  / Discord: Alieni
+## Version: 0.2.0
+## Notes: Displays information about your daily quests and lockouts.
+## SavedVariables: dailiesDB
+
+Components/Currencies.lua
+Components/FrameCreation.lua
+Components/QuestList.lua
+Components/InstanceSection.lua
+Components/SlashCommand.lua
+core.lua

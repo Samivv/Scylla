@@ -1,0 +1,11 @@
+{
+    "Lua.diagnostics.globals": [
+        "SlashCmdList",
+        "Background",
+        "GetCurrencyInfo"
+    ],
+    "Lua.diagnostics.disable": [
+        "need-check-nil",
+        "undefined-field"
+    ]
+}
