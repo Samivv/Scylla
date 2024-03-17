@@ -45,6 +45,7 @@ function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
                 instanceText:SetText(instanceInfo[index].name .. " - " .. instanceInfo[index].difficulty)
                 instanceText:Show()
     
+                
                 table.insert(instanceTexts, instanceText)
                 totalTextHeight = totalTextHeight + instanceText:GetStringHeight()
             end
