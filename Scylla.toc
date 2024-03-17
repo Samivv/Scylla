@@ -1,7 +1,7 @@
 ## Interface: 30403
-## Title: |cFFFF0000Testitena|r
+## Title: |cFFFF0000S C Y L L A|r
 ## Author: Túplapukki-PyrewoodVillage  / Discord: Alieni
-## Version: 0.2.0
+## Version: 0.5.0
 ## Notes: Displays information about your daily quests and lockouts.
 ## SavedVariables: dailiesDB
 

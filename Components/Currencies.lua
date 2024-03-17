@@ -1,7 +1,7 @@
 function CreateCurrencyDisplay(baseFrame, baseFrameWidth, baseFrameHeight)
     local currencyIDs = {341, 301, 2711, 101}
     local currencyDisplay = CreateFrame("Frame", "DailyToDoFrameCurrencyDisplay", baseFrame)
-    currencyDisplay:SetSize(baseFrameWidth, baseFrameHeight/1.75)
+    currencyDisplay:SetSize(baseFrameWidth, baseFrameHeight/1.5)
     currencyDisplay:SetPoint("TOP", baseFrame, "BOTTOM", 0, 0)
     local cdBG = currencyDisplay:CreateTexture(nil, "BACKGROUND")
     cdBG:SetAllPoints(currencyDisplay)
