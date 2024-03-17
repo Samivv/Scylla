@@ -1,7 +1,7 @@
-function CreateCurrencyDisplay(baseFrame)
+function CreateCurrencyDisplay(baseFrame, baseFrameWidth, baseFrameHeight)
     local currencyIDs = {341, 301, 2711, 101}
     local currencyDisplay = CreateFrame("Frame", "DailyToDoFrameCurrencyDisplay", baseFrame)
-    currencyDisplay:SetSize(baseFrame:GetWidth(), baseFrame:GetHeight() / 10)
+    currencyDisplay:SetSize(baseFrameWidth, baseFrameHeight/1.75)
     currencyDisplay:SetPoint("TOP", baseFrame, "BOTTOM", 0, 0)
     local cdBG = currencyDisplay:CreateTexture(nil, "BACKGROUND")
     cdBG:SetAllPoints(currencyDisplay)
@@ -45,12 +45,14 @@ function CreateCurrencyDisplay(baseFrame)
         end
     end
 
-    baseFrame:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
-    baseFrame:SetScript("OnEvent", function(self, event, ...)
+    currencyDisplay:RegisterEvent("CURRENCY_DISPLAY_UPDATE")
+    currencyDisplay:SetScript("OnEvent", function(self, event, ...)
         if event == "CURRENCY_DISPLAY_UPDATE" then
             UpdateCurrencyDisplay()
         end
     end)
 
     UpdateCurrencyDisplay()
+
+    return currencyDisplay
 end

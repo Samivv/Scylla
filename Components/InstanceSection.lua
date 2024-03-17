@@ -1,31 +1,27 @@
 -- Create the instance section
-function CreateInstanceSection(baseFrame)
-    local instanceSectionTitle = baseFrame:CreateFontString(nil, "OVERLAY")
-    instanceSectionTitle:SetFontObject("GameFontHighlight")
-    instanceSectionTitle:SetPoint("TOP", baseFrame, "BOTTOM", 0, baseFrame:GetHeight()/2)
-    instanceSectionTitle:SetWidth(baseFrame:GetWidth())
-    instanceSectionTitle:SetHeight(baseFrame:GetHeight()*0.1)
-    local instanceSection = baseFrame:CreateFontString(nil, "OVERLAY")
-    instanceSection:SetFontObject("GameFontHighlight")
-    instanceSection:SetPoint("TOP", instanceSectionTitle, "BOTTOM", 0, 0)
-    instanceSection:SetWidth(baseFrame:GetWidth())
+function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
+    -- Create a new frame for the instance section
+    local instanceSectionFrame = CreateFrame("Frame", "InstanceSectionFrame", baseFrame)
+    instanceSectionFrame:SetWidth(baseFrameWidth)
+    instanceSectionFrame:SetPoint("TOP", baseFrame, "BOTTOM", 0, 0)
 
-    local instanceBG = baseFrame:CreateTexture(nil, "BACKGROUND")
-    instanceBG:SetAllPoints(instanceSectionTitle)
-    instanceBG:SetColorTexture(1, 0, 0, 0.5) -- RGBA for black with 50% opacity
+    local ISCFBG = ApplyBG(instanceSectionFrame)
+
     local instanceInfo = {}
     local instanceTexts = {}
 
     local function UpdateInstanceSection()
         local numInstances = GetNumSavedInstances()
 
-        if numInstances > 0 then
-            instanceSectionTitle:SetText("Locked Instances")
-        else
-            instanceSectionTitle:SetText("No locked instances")
+        if numInstances == 0 then
+            local instanceText = instanceSectionFrame:CreateFontString(nil, "OVERLAY")
+            instanceText:SetFontObject("GameFontHighlight")
+            instanceText:SetPoint("TOP", instanceSectionFrame, "TOP", 0, 0)
+            instanceText:SetText("No locked instances")
+            instanceText:Show()
+            instanceSectionFrame:SetHeight(instanceText:GetHeight() + 10)
         end
 
-        -- Remove old instance texts
         for _, text in ipairs(instanceTexts) do
             text:Hide()
         end
@@ -41,14 +37,14 @@ function CreateInstanceSection(baseFrame)
                     locked = locked
                 }
 
-                -- Create a new FontString for this instance
-                local instanceText = baseFrame:CreateFontString(nil, "OVERLAY")
+                local instanceText = instanceSectionFrame:CreateFontString(nil, "OVERLAY")
                 instanceText:SetFontObject("GameFontHighlight")
-                instanceText:SetPoint("TOP", instanceSection, "BOTTOM", 0, -15 * (index - 1)) -- Position it below the previous instance
+                instanceText:SetPoint("TOP", instanceSectionFrame, "TOP", 0, -15 * (index - 1))
                 instanceText:SetText(instanceInfo[index].name .. " - " .. instanceInfo[index].difficulty)
                 instanceText:Show()
 
                 table.insert(instanceTexts, instanceText)
+                instanceSectionFrame:SetHeight(#instanceTexts * instanceText:GetHeight() + 10)
             end
         end
     end
@@ -62,4 +58,7 @@ function CreateInstanceSection(baseFrame)
     end)
 
     UpdateInstanceSection()
+    return instanceSectionFrame
 end
+
+

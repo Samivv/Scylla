@@ -1,7 +1,9 @@
 function CreateBaseFrame()
     local baseFrame = CreateFrame("Frame", "DailyToDoFrame", UIParent)
     
-    baseFrame:SetSize(GetScreenWidth() * 0.2, GetScreenHeight() * 0.25)
+    baseFrame:SetSize(GetScreenWidth() * 0.2, GetScreenHeight() * 0.03)
+    local width = baseFrame:GetWidth()
+    local height = baseFrame:GetHeight()
     baseFrame:SetPoint("CENTER")
     baseFrame:SetMovable(true)
     baseFrame:EnableMouse(true)
@@ -11,13 +13,13 @@ function CreateBaseFrame()
     
     -- Create the background
     local bg = baseFrame:CreateTexture(nil, "BACKGROUND")
-    -- bg:SetColorTexture(0, 0, 0, 0.5) -- RGBA for black with 50% opacity
     bg:SetAllPoints(baseFrame)
     bg:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
     
     -- Add close button to the frame
     local close = CreateFrame("Button", "DailyToDoFrameCloseButton", baseFrame)
-    close:SetSize(20, baseFrame:GetHeight() / 8)
+    -- close:SetSize(20, baseFrame:GetHeight() / 8)
+    close:SetSize(20, GetScreenHeight() * 0.03)
     close:SetPoint("TOPRIGHT", baseFrame, "TOPRIGHT")
 
     local closeText = close:CreateFontString()
@@ -44,54 +46,37 @@ function CreateBaseFrame()
     local titleBG = baseFrame:CreateTexture(nil, "BACKGROUND")
     titleBG:SetAllPoints(title)
     titleBG:SetColorTexture(1, 0, 0, 0.5) -- RGBA for red with 50% opacity
-    title:SetSize(baseFrame:GetWidth(), baseFrame:GetHeight() / 8)
+    title:SetSize(width, height)
     title:SetFontObject("GameFontHighlightLarge")
     title:SetPoint("TOP", baseFrame, "TOP", 0, 0)
     title:SetText(UnitName("player").."'s Dailies")
-    --title:SetText("Daily Checker")
     
-    return baseFrame
-end
+    local borderBottom = CreateFrame("Frame", nil, baseFrame)
+    borderBottom:SetPoint("BOTTOMLEFT", baseFrame, "BOTTOMLEFT")
+    borderBottom:SetPoint("BOTTOMRIGHT", baseFrame, "BOTTOMRIGHT")
+    borderBottom:SetHeight(1) -- 1 pixel tall
 
+    local borderBottomBG = borderBottom:CreateTexture(nil, "BACKGROUND")
+    borderBottomBG:SetAllPoints(borderBottom)
+    borderBottomBG:SetColorTexture(0, 0, 0,0.5) -- RGB for black
 
--- Create the footer
-function CreateFooter(baseFrame)
-    local footer = baseFrame:CreateFontString(nil, "OVERLAY")
-    footer:SetFontObject("GameFontHighlight")
-    footer:SetPoint("BOTTOM", baseFrame, "BOTTOM", 0, 0)
-    footer:SetSize(baseFrame:GetWidth(), baseFrame:GetHeight() / 8)
-
-    local titleBG = baseFrame:CreateTexture(nil, "BACKGROUND")
-    titleBG:SetAllPoints(footer)
-    titleBG:SetColorTexture(1, 0, 0, 0.5) -- RGBA for black with 50% opacity
-    
-    local function UpdateFooter()
-        local dailyResetTime = GetQuestResetTime()
-        local dailyHours = math.floor(dailyResetTime / 3600)
-        local dailyMinutes = math.floor((dailyResetTime % 3600) / 60)
-    
-        local weeklyResetTime = C_DateAndTime.GetSecondsUntilWeeklyReset()
-        local weeklyTimeText
-        if weeklyResetTime > 86400 then
-            local weeklyDays = math.floor(weeklyResetTime / 86400)
-            local weeklyHours = math.floor((weeklyResetTime % 86400) / 3600)
-            weeklyTimeText = weeklyDays .. "d " .. weeklyHours .. "h"
+    baseFrame:SetScript("OnKeyDown", function(self, key)
+        if key == "ESCAPE" then
+            self:Hide()
+            self:SetPropagateKeyboardInput(false)
         else
-            local weeklyHours = math.floor(weeklyResetTime / 3600)
-            local weeklyMinutes = math.floor((weeklyResetTime % 3600) / 60)
-            weeklyTimeText = weeklyHours .. "h " .. weeklyMinutes .. "m"
-        end
-    
-        footer:SetText("Daily reset in " .. dailyHours .. "h " .. dailyMinutes .. "m\n" ..
-                       "Weekly reset in " .. weeklyTimeText)
-    end
-    
-    baseFrame:SetScript("OnUpdate", function(self, elapsed)
-        self.timeSinceLastUpdate = (self.timeSinceLastUpdate or 0) + elapsed
-        if self.timeSinceLastUpdate >= 1.0 then
-            UpdateFooter()
-            self.timeSinceLastUpdate = 0
+            self:SetPropagateKeyboardInput(true)
         end
     end)
+    baseFrame:SetPropagateKeyboardInput(true)
+
+    return baseFrame, width, height
 end
 
+function ApplyBG(x)
+    local bg = x:CreateTexture(nil, "BACKGROUND")
+    bg:SetAllPoints(x)
+    bg:SetColorTexture(1, 0, 0, 0.5) -- RGBA for red with 50% opacity
+    bg:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+    return bg
+end
