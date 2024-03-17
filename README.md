@@ -1,4 +1,3 @@
-Scylla Addon
 Scylla is a World of Warcraft addon that provides a user-friendly interface for managing quests, instance lockouts, and currencies.
 
 Features
