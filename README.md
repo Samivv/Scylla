@@ -1,24 +1,46 @@
-Scylla is a World of Warcraft addon that provides a user-friendly interface for managing quests, instance lockouts, and currencies.
+Determining workspace structure
 
-Features
-Displays a list of current quests
-Shows instance lockouts
-Provides a currency display
-Allows for easy management through slash commands
-Structure
-The addon is structured into several components, each responsible for a specific part of the functionality:
+Deciding which workspace information to collect
 
-FrameCreation.lua: Responsible for creating the base frame of the addon.
-QuestList.lua: Handles the creation and management of the quest list.
-Divider.lua: Used to create dividers between different sections of the addon.
-InstanceSection.lua: Manages the instance lockouts section.
-Footer.lua: Creates the footer of the addon.
-Currencies.lua: Handles the currency display.
-SlashCommand.lua: Implements the slash commands for managing the addon.
-The main logic of the addon is contained in core.lua.
+Gathering workspace info
 
-Usage
-After installing and enabling the addon, you will see the frame open on login. You can also use the /scylla command to open the addon when closed.
+# Scylla
 
-License
-This project is licensed under the MIT License.
+Scylla is a World of Warcraft addon that displays information about your daily quests and lockouts.
+
+## Features
+
+- Displays daily quests
+- Shows instance lockouts
+- Provides a currency display
+
+## Installation
+
+1. Download the latest version of the addon from the GitHub repository.
+2. Extract the downloaded zip file.
+3. Copy the extracted folder to your `World of Warcraft/_classic_/Interface/AddOns` directory.
+
+## Usage
+
+The addon automatically runs when you log into the game. It will display a frame with information about your daily quests, instance lockouts, and currencies.
+
+## Components
+
+The addon is composed of several Lua files, each responsible for a different part of the addon:
+
+- Divider.lua: Creates dividers in the addon's frame.
+- Footer.lua: Handles the creation of the footer section.
+- Currencies.lua: Manages the display of currencies.
+- FrameCreation.lua: Responsible for creating the main frame of the addon.
+- QuestList.lua: Handles the creation and management of the quest list.
+- InstanceSection.lua: Manages the display of instance lockouts.
+- SlashCommand.lua: Handles slash commands for the addon.
+- core.lua: The main file that ties all the components together.
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and create a pull request with your changes.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
