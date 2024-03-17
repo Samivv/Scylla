@@ -1,9 +1,3 @@
-Determining workspace structure
-
-Deciding which workspace information to collect
-
-Gathering workspace info
-
 # Scylla
 
 Scylla is a World of Warcraft addon that displays information about your daily quests and lockouts.
