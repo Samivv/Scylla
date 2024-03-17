@@ -1,5 +1,5 @@
 function CreateBaseFrame()
-    local baseFrame = CreateFrame("Frame", "DailyToDoFrame", UIParent)
+    local baseFrame = CreateFrame("Frame", "Scylla", UIParent)
     
     baseFrame:SetSize(GetScreenWidth() * 0.2, GetScreenHeight() * 0.03)
     local width = baseFrame:GetWidth()
@@ -17,8 +17,7 @@ function CreateBaseFrame()
     bg:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
     
     -- Add close button to the frame
-    local close = CreateFrame("Button", "DailyToDoFrameCloseButton", baseFrame)
-    -- close:SetSize(20, baseFrame:GetHeight() / 8)
+    local close = CreateFrame("Button", "ScyllaCloseButton", baseFrame)
     close:SetSize(20, GetScreenHeight() * 0.03)
     close:SetPoint("TOPRIGHT", baseFrame, "TOPRIGHT")
 

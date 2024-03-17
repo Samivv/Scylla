@@ -12,14 +12,16 @@ function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
 
     local function UpdateInstanceSection()
         local numInstances = GetNumSavedInstances()
+        local margin = 10
+        local totalTextHeight = 0
 
         if numInstances == 0 then
             local instanceText = instanceSectionFrame:CreateFontString(nil, "OVERLAY")
             instanceText:SetFontObject("GameFontHighlight")
-            instanceText:SetPoint("TOP", instanceSectionFrame, "TOP", 0, 0)
+            instanceText:SetPoint("TOP", instanceSectionFrame, "TOP", 0, -margin) -- Position the text with top margin
             instanceText:SetText("No locked instances")
             instanceText:Show()
-            instanceSectionFrame:SetHeight(instanceText:GetHeight() + 10)
+            totalTextHeight = instanceText:GetStringHeight() -- Update the total text height
         end
 
         for _, text in ipairs(instanceTexts) do
@@ -39,14 +41,15 @@ function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
 
                 local instanceText = instanceSectionFrame:CreateFontString(nil, "OVERLAY")
                 instanceText:SetFontObject("GameFontHighlight")
-                instanceText:SetPoint("TOP", instanceSectionFrame, "TOP", 0, -15 * (index - 1))
+                instanceText:SetPoint("TOP", instanceSectionFrame, "TOP", 0, -totalTextHeight - margin) -- Position the text below the previous one
                 instanceText:SetText(instanceInfo[index].name .. " - " .. instanceInfo[index].difficulty)
                 instanceText:Show()
-
+    
                 table.insert(instanceTexts, instanceText)
-                instanceSectionFrame:SetHeight(#instanceTexts * instanceText:GetHeight() + 10)
+                totalTextHeight = totalTextHeight + instanceText:GetStringHeight()
             end
         end
+        instanceSectionFrame:SetHeight(totalTextHeight + 2 * margin)
     end
 
     baseFrame:RegisterEvent("UPDATE_INSTANCE_INFO")

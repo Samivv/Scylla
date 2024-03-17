@@ -2,19 +2,23 @@
 function CreateFooter(baseFrame, baseFrameWidth, baseFrameHeight)
     local footerFrame = CreateFrame("Frame", nil, baseFrame)
     footerFrame:SetPoint("TOP", baseFrame, "BOTTOM", 0, 0)
-    footerFrame:SetSize(baseFrameWidth, baseFrameHeight / 8)
+    footerFrame:SetSize(baseFrameWidth, baseFrameHeight / 10)
+
+    local footerBG = footerFrame:CreateTexture(nil, "BACKGROUND")
+    footerBG:SetAllPoints(footerFrame)
+    footerBG:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 
     local footerText1 = footerFrame:CreateFontString(nil, "OVERLAY")
     footerText1:SetFontObject("GameFontHighlight")
-    footerText1:SetPoint("TOP", footerFrame, "TOP", 0, -10)
+    footerText1:SetPoint("TOP", footerFrame, "CENTER", 0, 0)
 
     local footerText2 = footerFrame:CreateFontString(nil, "OVERLAY")
     footerText2:SetFontObject("GameFontHighlight")
-    footerText2:SetPoint("BOTTOM", footerFrame, "BOTTOM", 0, 10)
+    footerText2:SetPoint("BOTTOM", footerText1, "BOTTOM", 0, 12)
 
     local titleBG = footerFrame:CreateTexture(nil, "BACKGROUND")
     titleBG:SetAllPoints(footerFrame)
-    titleBG:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+    titleBG:SetColorTexture(1, 0, 0, 0.5)
 
     local function UpdateFooter()
         local dailyResetTime = GetQuestResetTime()
@@ -36,9 +40,10 @@ function CreateFooter(baseFrame, baseFrameWidth, baseFrameHeight)
         footerText1:SetText("Daily reset in " .. dailyHours .. "h " .. dailyMinutes .. "m")
         footerText2:SetText("Weekly reset in " .. weeklyTimeText)
 
-        -- Adjust frame height based on text size
-        local textHeight = footerText1:GetStringHeight() + footerText2:GetStringHeight() + 20
-        footerFrame:SetSize(baseFrameWidth, textHeight)
+        local textHeight1 = footerText1:GetStringHeight()
+        local textHeight2 = footerText2:GetStringHeight()
+        local totalTextHeight = textHeight1 + textHeight2 + 10
+        footerFrame:SetSize(baseFrameWidth, totalTextHeight)
     end
 
     footerFrame:SetScript("OnUpdate", function(self, elapsed)

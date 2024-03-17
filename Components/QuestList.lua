@@ -3,7 +3,7 @@ function CreateQuestList(baseFrame,baseFrameWidth, baseFrameHeight)
     local questList = {"Daily Gamma", "Daily HC", "Weekly"}
     local checkboxes = {}
 
-    local checkboxFrame = CreateFrame("Frame", "DailyToDoFrameQuestList", baseFrame)
+    local checkboxFrame = CreateFrame("Frame", "ScyllaQuestList", baseFrame)
     checkboxFrame:SetWidth(baseFrameWidth)
     checkboxFrame:SetPoint("TOP", baseFrame, "BOTTOM", 0, 0)
     local checkboxBG = checkboxFrame:CreateTexture(nil, "BACKGROUND")
@@ -14,7 +14,7 @@ function CreateQuestList(baseFrame,baseFrameWidth, baseFrameHeight)
     
 
     for i, quest in ipairs(questList) do
-        local checkbox = CreateFrame("CheckButton", "DailyToDoFrameQuest"..i, checkboxFrame, "UICheckButtonTemplate") -- Parent the checkbox to checkboxFrame
+        local checkbox = CreateFrame("CheckButton", "ScyllaQuest"..i, checkboxFrame, "UICheckButtonTemplate") -- Parent the checkbox to checkboxFrame
         if i == 1 then
             checkbox:SetPoint("TOPLEFT", checkboxFrame, "TOPLEFT", 0, 0) -- Position the first checkbox at the top left corner of checkboxFrame
         else
@@ -39,7 +39,7 @@ function CreateQuestList(baseFrame,baseFrameWidth, baseFrameHeight)
         checkbox:SetDisabledCheckedTexture(checkboxTexture)
         
         -- Create a new FontString for the quest status
-        local statusText = baseFrame:CreateFontString(nil, "OVERLAY")
+        local statusText = checkbox:CreateFontString(nil, "OVERLAY")
         statusText:SetFontObject("GameFontHighlight")
         statusText:SetPoint("LEFT", checkboxText, "RIGHT", 10, 0) -- Position it to the right of the checkbox
 

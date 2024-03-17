@@ -1,11 +1,11 @@
 function CreateCurrencyDisplay(baseFrame, baseFrameWidth, baseFrameHeight)
     local currencyIDs = {341, 301, 2711, 101}
-    local currencyDisplay = CreateFrame("Frame", "DailyToDoFrameCurrencyDisplay", baseFrame)
-    currencyDisplay:SetSize(baseFrameWidth, baseFrameHeight/1.5)
+    local currencyDisplay = CreateFrame("Frame", "ScyllaCurrencyDisplay", baseFrame)
+    currencyDisplay:SetSize(baseFrameWidth, baseFrameHeight*0.95)
     currencyDisplay:SetPoint("TOP", baseFrame, "BOTTOM", 0, 0)
     local cdBG = currencyDisplay:CreateTexture(nil, "BACKGROUND")
     cdBG:SetAllPoints(currencyDisplay)
-    cdBG:SetColorTexture(1, 0, 0, 0.5) -- RGBA for black with 50% opacity
+    cdBG:SetColorTexture(1, 0, 0, 0.5) -- RGBA for red with 50% opacity
     cdBG:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
 
     local currencyTexts = {}
