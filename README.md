@@ -1,12 +1,13 @@
 # Scylla
 
-Scylla is a World of Warcraft addon that displays information about your daily quests and lockouts.
+Scylla is a World of Warcraft(WOTLK) addon that displays information about your character in a clean and fast way to help plan out your adventures for the session.
 
 ## Features
 
 - Displays daily quests
 - Shows instance lockouts
 - Provides a currency display
+- Reputations display
 
 ## Installation
 
@@ -23,6 +24,7 @@ The addon automatically runs when you log into the game. It will display a frame
 The addon is composed of several Lua files, each responsible for a different part of the addon:
 
 - Divider.lua: Creates dividers in the addon's frame.
+- Reputations.lua: Handles displaying reputations
 - Footer.lua: Handles the creation of the footer section.
 - Currencies.lua: Manages the display of currencies.
 - FrameCreation.lua: Responsible for creating the main frame of the addon.
