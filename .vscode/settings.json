@@ -7,5 +7,5 @@
     "Lua.diagnostics.disable": [
         "need-check-nil",
         "undefined-field"
-    ]
+    ],
 }
