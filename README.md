@@ -1,6 +1,6 @@
 # Scylla
 
-Scylla is a World of Warcraft(WOTLK) addon that displays information in a clean way to help plan out your adventures for the session.
+Scylla is a World of Warcraft(WOTLK) addon that displays information about your character in a clean and fast way to help plan out your adventures for the session.
 
 ## Features
 
