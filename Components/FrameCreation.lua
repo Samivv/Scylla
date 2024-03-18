@@ -51,14 +51,7 @@ function CreateBaseFrame()
     -- title:SetText(UnitName("player").."'s Dailies")
     title:SetText("S C Y L L A")
     
-    local borderBottom = CreateFrame("Frame", nil, baseFrame)
-    borderBottom:SetPoint("BOTTOMLEFT", baseFrame, "BOTTOMLEFT")
-    borderBottom:SetPoint("BOTTOMRIGHT", baseFrame, "BOTTOMRIGHT")
-    borderBottom:SetHeight(1) -- 1 pixel tall
-
-    local borderBottomBG = borderBottom:CreateTexture(nil, "BACKGROUND")
-    borderBottomBG:SetAllPoints(borderBottom)
-    borderBottomBG:SetColorTexture(0, 0, 0,0.5) -- RGB for black
+    local borderBottom = CreateBorderBottom(baseFrame)
 
     baseFrame:SetScript("OnKeyDown", function(self, key)
         if key == "ESCAPE" then
@@ -103,3 +96,42 @@ function CreateHoverableFrame(parent, width, height)
 end
 
 --local frame = CreateHoverableFrame(ScyllaInstanceSectionFrame, frameWidth, frameHeight)
+
+
+function CreateBorderBottom(baseFrame)
+    local borderBottom = CreateFrame("Frame", nil, baseFrame)
+    borderBottom:SetPoint("BOTTOMLEFT", baseFrame, "BOTTOMLEFT")
+    borderBottom:SetPoint("BOTTOMRIGHT", baseFrame, "BOTTOMRIGHT")
+    borderBottom:SetHeight(1) -- 1 pixel tall
+
+    local borderBottomBG = borderBottom:CreateTexture(nil, "BACKGROUND")
+    borderBottomBG:SetAllPoints(borderBottom)
+    borderBottomBG:SetColorTexture(0, 0, 0,0.5) -- RGB for black
+
+    return borderBottom
+end
+-- local borderBottom = CreateBorderBottom(myFrame)
+
+
+function CreateLabelFrame(parentFrame, frameWidth, labels)
+    -- Create a frame for the labels
+    local labelFrame = CreateFrame("Frame", nil, parentFrame)
+    labelFrame:SetSize(frameWidth, 30)  -- Set this to the desired height of the label frame
+    labelFrame:SetPoint("TOPLEFT", parentFrame, "TOPLEFT", 0, 0)
+    local borderBottom = CreateBorderBottom(labelFrame)
+
+    -- Create labels
+    for i, labelText in ipairs(labels) do
+        local label = labelFrame:CreateFontString(nil, "OVERLAY")
+        label:SetFontObject("GameFontHighlight")
+        label:SetText(labelText)
+        label:SetWidth(frameWidth / #labels)
+        label:SetPoint("LEFT", labelFrame, "LEFT", (i - 1) * frameWidth / #labels, 0)
+        label:SetTextColor(1, 1, 1)  -- Set the text color to white
+    end
+
+    return labelFrame
+end
+
+--local labelTexts = {"Kills", "Name", "Difficulty"}
+--local labelFrame = CreateLabelFrame(ScyllaInstanceSectionFrame, baseFrameWidth, labelTexts)

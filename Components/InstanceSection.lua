@@ -8,23 +8,11 @@ function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
     local ISCFBG = ApplyBG(ScyllaInstanceSectionFrame)
 
     local instanceInfo = {}
-    local instanceTexts = {}
 
-    -- Create a frame for the labels
-    local labelFrame = CreateFrame("Frame", nil, ScyllaInstanceSectionFrame)
-    labelFrame:SetSize(baseFrameWidth, 30)  -- Set this to the desired height of the label frame
-    labelFrame:SetPoint("TOPLEFT", ScyllaInstanceSectionFrame, "TOPLEFT", 0, 0)
-
-    -- Create labels
     local labelTexts = {"Kills", "Name", "Difficulty"}
-    for i, labelText in ipairs(labelTexts) do
-        local label = labelFrame:CreateFontString(nil, "OVERLAY")
-        label:SetFontObject("GameFontHighlight")
-        label:SetText(labelText)
-        label:SetWidth(baseFrameWidth / 3)
-        label:SetPoint("LEFT", labelFrame, "LEFT", (i - 1) * baseFrameWidth / 3, 0)
-        label:SetTextColor(1, 1, 1)  -- Set the text color to white
-    end
+    local labelFrame = CreateLabelFrame(ScyllaInstanceSectionFrame, baseFrameWidth, labelTexts)
+
+
     local function UpdateInstanceSection()
         local numInstances = GetNumSavedInstances()
         local margin = 10

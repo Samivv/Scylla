@@ -18,22 +18,32 @@ function CreateReputationsFrame(baseFrame, baseFrameWidth, baseFrameHeight)
     local frameWidth = reputationsFrame:GetWidth() / 3
     local frameHeight = 30  -- Set this to the desired height of each frame
     local frames = {}
-    
+
     for index, item in ipairs(trackedReputations) do
         local frame = CreateHoverableFrame(reputationsFrame, frameWidth, frameHeight)
-    
+
         local text1 = frame:CreateFontString(nil, "OVERLAY")
         text1:SetFontObject("AchievementDateFont")
         text1:SetText(item.name)
         text1:SetPoint("CENTER", frame, "CENTER", 0, frameHeight / 4) 
         text1:SetTextColor(1, 1, 1)  -- Set the text color to white
     
+        local _, _, standingID, barMin, barMax, barValue = GetFactionInfoByID(item.id)
+        local currentReputation = barValue - barMin
+        local nextRankReputation = barMax - barMin
+        
         local text2 = frame:CreateFontString(nil, "OVERLAY")
         text2:SetFontObject("AchievementDateFont")
-        -- text2:SetText(item.id)
-        text2:SetText("0/0")
         text2:SetPoint("CENTER", frame, "CENTER", 0, -frameHeight / 4)
         text2:SetTextColor(1, 1, 1)  -- Set the text color to white
+        
+        if currentReputation == nextRankReputation-1 then
+            text2:SetText("Exalted")
+            text2:SetTextColor(1,0,0)
+        else
+            text2:SetText(currentReputation .. "/" .. nextRankReputation)
+        end
+        
         local row = math.floor((index - 1) / 3)
         local col = (index - 1) % 3
     
