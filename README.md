@@ -1,6 +1,6 @@
 # Scylla
 
-Scylla is a World of Warcraft addon that displays information about your daily quests and lockouts.
+Scylla is a World of Warcraft(WOTLK) addon that displays information in a clean way to help plan out your adventures for the session.
 
 ## Features
 
