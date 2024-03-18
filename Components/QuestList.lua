@@ -24,7 +24,7 @@ function CreateQuestList(baseFrame, baseFrameWidth, baseFrameHeight)
         -- Create the quest status label
         local statusLabel = questFrame:CreateFontString(nil, "OVERLAY")
         statusLabel:SetFontObject("GameFontHighlight")
-        statusLabel:SetText(C_QuestLog.IsQuestFlaggedCompleted(questIDList[i]) and "Completed" or "Not Completed")
+        statusLabel:SetText(C_QuestLog.IsQuestFlaggedCompleted(questIDList[i]) and "+" or "-")
         statusLabel:SetWidth(baseFrameWidth / 3)
         statusLabel:SetPoint("CENTER", questFrame, "CENTER", -(baseFrameWidth / 3), 0) -- Position it at the center of the quest frame
         statusLabel:SetTextColor(1, 1, 1)  -- Set the text color to white
@@ -40,7 +40,7 @@ function CreateQuestList(baseFrame, baseFrameWidth, baseFrameHeight)
         -- Create the quest active label
         local activeLabel = questFrame:CreateFontString(nil, "OVERLAY")
         activeLabel:SetFontObject("GameFontHighlight")
-        activeLabel:SetText(C_QuestLog.IsOnQuest(questIDList[i]) and "Active" or "Not Active")
+        activeLabel:SetText(C_QuestLog.IsOnQuest(questIDList[i]) and "Active" or "-")
         activeLabel:SetWidth(baseFrameWidth / 3)
         activeLabel:SetPoint("CENTER", questFrame, "CENTER", baseFrameWidth / 3, 0) -- Position it at the center of the quest frame
         activeLabel:SetTextColor(1, 1, 1)  -- Set the text color to white

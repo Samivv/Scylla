@@ -1,7 +1,7 @@
 -- Create the instance section
 function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
     -- Create a new frame for the instance section
-    local ScyllaInstanceSectionFrame = CreateFrame("Frame", "ScyllaScyllaInstanceSectionFrame", baseFrame)
+    local ScyllaInstanceSectionFrame = CreateFrame("Frame", "ScyllaScyllaInstanceSection", baseFrame)
     ScyllaInstanceSectionFrame:SetWidth(baseFrameWidth)
     ScyllaInstanceSectionFrame:SetPoint("TOP", baseFrame, "BOTTOM", 0, 0)
 
