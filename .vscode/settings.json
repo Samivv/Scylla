@@ -2,10 +2,14 @@
     "Lua.diagnostics.globals": [
         "SlashCmdList",
         "Background",
-        "GetCurrencyInfo"
+        "GetCurrencyInfo",
+        "GetText",
+        "DEFAULT_CHAT_FRAME",
+        "SetColorTexture"
     ],
     "Lua.diagnostics.disable": [
         "need-check-nil",
-        "undefined-field"
+        "undefined-field",
+        "undefined-global"
     ],
 }

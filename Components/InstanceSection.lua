@@ -1,33 +1,43 @@
 -- Create the instance section
 function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
     -- Create a new frame for the instance section
-    local instanceSectionFrame = CreateFrame("Frame", "InstanceSectionFrame", baseFrame)
-    instanceSectionFrame:SetWidth(baseFrameWidth)
-    instanceSectionFrame:SetPoint("TOP", baseFrame, "BOTTOM", 0, 0)
+    local ScyllaInstanceSectionFrame = CreateFrame("Frame", "ScyllaScyllaInstanceSectionFrame", baseFrame)
+    ScyllaInstanceSectionFrame:SetWidth(baseFrameWidth)
+    ScyllaInstanceSectionFrame:SetPoint("TOP", baseFrame, "BOTTOM", 0, 0)
 
-    local ISCFBG = ApplyBG(instanceSectionFrame)
+    local ISCFBG = ApplyBG(ScyllaInstanceSectionFrame)
 
     local instanceInfo = {}
     local instanceTexts = {}
 
+    -- Create a frame for the labels
+    local labelFrame = CreateFrame("Frame", nil, ScyllaInstanceSectionFrame)
+    labelFrame:SetSize(baseFrameWidth, 30)  -- Set this to the desired height of the label frame
+    labelFrame:SetPoint("TOPLEFT", ScyllaInstanceSectionFrame, "TOPLEFT", 0, 0)
+
+    -- Create labels
+    local labelTexts = {"Kills", "Name", "Difficulty"}
+    for i, labelText in ipairs(labelTexts) do
+        local label = labelFrame:CreateFontString(nil, "OVERLAY")
+        label:SetFontObject("GameFontHighlight")
+        label:SetText(labelText)
+        label:SetWidth(baseFrameWidth / 3)
+        label:SetPoint("LEFT", labelFrame, "LEFT", (i - 1) * baseFrameWidth / 3, 0)
+        label:SetTextColor(1, 1, 1)  -- Set the text color to white
+    end
     local function UpdateInstanceSection()
         local numInstances = GetNumSavedInstances()
         local margin = 10
         local totalTextHeight = 0
+        local frameWidth = ScyllaInstanceSectionFrame:GetWidth()
+        local sectionWidth = frameWidth / 3
+        local frameHeight = 30  -- Set this to the desired height of each frame
+        local frames = {}
 
-        if numInstances == 0 then
-            local instanceText = instanceSectionFrame:CreateFontString(nil, "OVERLAY")
-            instanceText:SetFontObject("GameFontHighlight")
-            instanceText:SetPoint("TOP", instanceSectionFrame, "TOP", 0, -margin) -- Position the text with top margin
-            instanceText:SetText("No locked instances")
-            instanceText:Show()
-            totalTextHeight = instanceText:GetStringHeight() -- Update the total text height
+        for _, frame in ipairs(frames) do
+            frame:Hide()
         end
-
-        for _, text in ipairs(instanceTexts) do
-            text:Hide()
-        end
-        wipe(instanceTexts)
+        wipe(frames)
 
         if numInstances > 0 then
             for index = 1, numInstances do
@@ -36,21 +46,41 @@ function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
                     name = name,
                     difficulty = difficultyName,
                     isRaid = isRaid,
-                    locked = locked
+                    locked = locked,
+                    numEncounters = numEncounters,
+                    encounterProgress = encounterProgress
                 }
 
-                local instanceText = instanceSectionFrame:CreateFontString(nil, "OVERLAY")
-                instanceText:SetFontObject("GameFontHighlight")
-                instanceText:SetPoint("TOP", instanceSectionFrame, "TOP", 0, -totalTextHeight - margin) -- Position the text below the previous one
-                instanceText:SetText(instanceInfo[index].name .. " - " .. instanceInfo[index].difficulty)
-                instanceText:Show()
-    
-                
-                table.insert(instanceTexts, instanceText)
-                totalTextHeight = totalTextHeight + instanceText:GetStringHeight()
+                local frame = CreateHoverableFrame(ScyllaInstanceSectionFrame, frameWidth, frameHeight)
+
+                local text1 = frame:CreateFontString(nil, "OVERLAY")
+                text1:SetFontObject("GameFontHighlight")
+                text1:SetText(instanceInfo[index].encounterProgress.."/"..instanceInfo[index].numEncounters)
+                text1:SetWidth(sectionWidth)
+                text1:SetPoint("LEFT", frame, "LEFT", 0, 0) 
+                text1:SetTextColor(1, 1, 1)  -- Set the text color to white
+
+                local text2 = frame:CreateFontString(nil, "OVERLAY")
+                text2:SetFontObject("GameFontHighlight")
+                text2:SetText(instanceInfo[index].name)
+                text2:SetWidth(sectionWidth)
+                text2:SetPoint("LEFT", text1, "RIGHT", 0, 0)
+                text2:SetTextColor(1, 1, 1)  -- Set the text color to white
+
+                local text3 = frame:CreateFontString(nil, "OVERLAY")
+                text3:SetFontObject("GameFontHighlight")
+                text3:SetText(instanceInfo[index].difficulty)
+                text3:SetWidth(sectionWidth)
+                text3:SetPoint("LEFT", text2, "RIGHT", 0, 0)
+                text3:SetTextColor(1, 1, 1)  -- Set the text color to white
+
+                frame:SetPoint("TOPLEFT", labelFrame, "BOTTOMLEFT", 0, -totalTextHeight)
+
+                table.insert(frames, frame)
+                totalTextHeight = totalTextHeight + frameHeight
             end
         end
-        instanceSectionFrame:SetHeight(totalTextHeight + 2 * margin)
+        ScyllaInstanceSectionFrame:SetHeight(totalTextHeight + 2 * margin+30)
     end
 
     baseFrame:RegisterEvent("UPDATE_INSTANCE_INFO")
@@ -62,7 +92,7 @@ function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
     end)
 
     UpdateInstanceSection()
-    return instanceSectionFrame
+    return ScyllaInstanceSectionFrame
 end
 
 

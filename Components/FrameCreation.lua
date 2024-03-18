@@ -62,6 +62,7 @@ function CreateBaseFrame()
 
     baseFrame:SetScript("OnKeyDown", function(self, key)
         if key == "ESCAPE" then
+            print("|cFFFF0000[S C Y L L A]|r: Hiding frame. |cFFFF0000/scylla|r to show again")
             self:Hide()
             self:SetPropagateKeyboardInput(false)
         else
@@ -80,3 +81,25 @@ function ApplyBG(x)
     bg:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
     return bg
 end
+
+function CreateHoverableFrame(parent, width, height)
+    local frame = CreateFrame("Frame", nil, parent)
+    frame:SetSize(width, height)
+
+    -- Create a texture for the background
+    local bg = frame:CreateTexture(nil, "BACKGROUND")
+    bg:SetAllPoints()
+    bg:SetColorTexture(1, 1, 1, 0)  -- Set the initial background color to transparent
+
+    -- Set the scripts for the hover effect
+    frame:SetScript("OnEnter", function(self)
+        bg:SetColorTexture(0, 0, 0, 1)  -- Change the background color to black on hover
+    end)
+    frame:SetScript("OnLeave", function(self)
+        bg:SetColorTexture(1, 1, 1, 0)  -- Change the background color back to transparent when the mouse leaves
+    end)
+
+    return frame
+end
+
+--local frame = CreateHoverableFrame(ScyllaInstanceSectionFrame, frameWidth, frameHeight)

@@ -1,45 +1,54 @@
---Generate reputation frame with the ashen verdict and the argent crusade standing shown.
 function CreateReputationsFrame(baseFrame, baseFrameWidth, baseFrameHeight)
-    local reputationsFrame = CreateFrame("Frame", nil, baseFrame)
+    local trackedReputations = 
+    {
+        {name= "The Ashen Verdict", id=1156},
+        {name= "Argent Crusade", id=1106},
+        {name= "Kirin Tor", id=1090},
+        {name= "The Wyrmrest Accord", id=1091},
+        {name= "Knights of the Ebon Blade", id=1098},
+        {name= "The Sons of Hodir", id=1119}
+    }
+
+    local reputationsFrame = CreateFrame("Frame", "ScyllaReputations", baseFrame)
     reputationsFrame:SetPoint("TOP", baseFrame, "BOTTOM", 0, 0)
-    reputationsFrame:SetSize(baseFrameWidth, baseFrameHeight / 10)
-
-    local reputationsBG = reputationsFrame:CreateTexture(nil, "BACKGROUND")
-    reputationsBG:SetAllPoints(reputationsFrame)
-    reputationsBG:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
-
-    local reputationsText1 = reputationsFrame:CreateFontString(nil, "OVERLAY")
-    reputationsText1:SetFontObject("GameFontHighlight")
-    reputationsText1:SetPoint("TOP", reputationsFrame, "CENTER", 0, 0)
-
-    local reputationsText2 = reputationsFrame:CreateFontString(nil, "OVERLAY")
-    reputationsText2:SetFontObject("GameFontHighlight")
-    reputationsText2:SetPoint("BOTTOM", reputationsText1, "BOTTOM", 0, 12)
-
-    local titleBG = reputationsFrame:CreateTexture(nil, "BACKGROUND")
-    titleBG:SetAllPoints(reputationsFrame)
-    titleBG:SetColorTexture(1, 0, 0, 0.5)
-
-    local function UpdateReputations()
-        local ashenVerdictStanding = GetFactionInfoByID(1156)
-        local argentCrusadeStanding = GetFactionInfoByID(1106)
-
-        reputationsText1:SetText("Ashen Verdict: " .. ashenVerdictStanding)
-        reputationsText2:SetText("Argent Crusade: " .. argentCrusadeStanding)
-
-        local textHeight1 = reputationsText1:GetStringHeight()
-        local textHeight2 = reputationsText2:GetStringHeight()
-        local totalTextHeight = textHeight1 + textHeight2 + 10
-        reputationsFrame:SetSize(baseFrameWidth, totalTextHeight)
-    end
-
-    reputationsFrame:SetScript("OnUpdate", function(self, elapsed)
-        self.timeSinceLastUpdate = (self.timeSinceLastUpdate or 0) + elapsed
-        if self.timeSinceLastUpdate >= 1.0 then
-            UpdateReputations()
-            self.timeSinceLastUpdate = 0
+    reputationsFrame:SetSize(baseFrameWidth, baseFrameHeight)
+    
+    local bg = ApplyBG(reputationsFrame)
+    
+    local frameWidth = reputationsFrame:GetWidth() / 3
+    local frameHeight = 30  -- Set this to the desired height of each frame
+    local frames = {}
+    
+    for index, item in ipairs(trackedReputations) do
+        local frame = CreateHoverableFrame(reputationsFrame, frameWidth, frameHeight)
+    
+        local text1 = frame:CreateFontString(nil, "OVERLAY")
+        text1:SetFontObject("AchievementDateFont")
+        text1:SetText(item.name)
+        text1:SetPoint("CENTER", frame, "CENTER", 0, frameHeight / 4) 
+        text1:SetTextColor(1, 1, 1)  -- Set the text color to white
+    
+        local text2 = frame:CreateFontString(nil, "OVERLAY")
+        text2:SetFontObject("AchievementDateFont")
+        -- text2:SetText(item.id)
+        text2:SetText("0/0")
+        text2:SetPoint("CENTER", frame, "CENTER", 0, -frameHeight / 4)
+        text2:SetTextColor(1, 1, 1)  -- Set the text color to white
+        local row = math.floor((index - 1) / 3)
+        local col = (index - 1) % 3
+    
+        if row == 0 and col == 0 then
+            frame:SetPoint("TOPLEFT", reputationsFrame, "TOPLEFT", 0, 0)
+        elseif row == 0 then
+            frame:SetPoint("TOPLEFT", frames[index - 1], "TOPRIGHT", 0, 0)
+        else
+            frame:SetPoint("TOPLEFT", frames[index - 3], "BOTTOMLEFT", 0, 0)
         end
-    end)
-
+    
+        table.insert(frames, frame)
+    end
+    
+    reputationsFrame:SetHeight(frameHeight * math.ceil(#trackedReputations / 3))
+    
     return reputationsFrame
 end
