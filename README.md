@@ -7,6 +7,7 @@ Scylla is a World of Warcraft addon that displays information about your daily q
 - Displays daily quests
 - Shows instance lockouts
 - Provides a currency display
+- Reputations display
 
 ## Installation
 
