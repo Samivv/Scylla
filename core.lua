@@ -5,7 +5,8 @@ function Main()
   local instanceSection = CreateInstanceSection(dockerFrame2,width,height)
   local footer = CreateFooter(instanceSection,width,height)
   local currencyDisplay = CreateCurrencyDisplay(footer,width,height)
-  -- local dockerFrame4 = CreateDivider(footer, width, height,"Currency Display")
+  local dockerFrame4 = CreateDivider(currencyDisplay, width, height,"Reputations")
+  -- local reputationFrame = CreateReputationFrame(dockerFrame4,width,height)
   CreateSlashCommand(baseFrame)
 end
 
