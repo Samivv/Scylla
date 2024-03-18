@@ -28,6 +28,7 @@ function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
         wipe(frames)
 
         if numInstances > 0 then
+            labelFrame:Show()
             for index = 1, numInstances do
                 local name, id, reset, difficulty, locked, extended, instanceIDMostSig, isRaid, maxPlayers, difficultyName, numEncounters, encounterProgress = GetSavedInstanceInfo(index)
                 instanceInfo[index] = {
@@ -38,7 +39,6 @@ function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
                     numEncounters = numEncounters,
                     encounterProgress = encounterProgress
                 }
-
                 local frame = CreateHoverableFrame(ScyllaInstanceSectionFrame, frameWidth, frameHeight)
 
                 local text1 = frame:CreateFontString(nil, "OVERLAY")
@@ -66,7 +66,15 @@ function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
 
                 table.insert(frames, frame)
                 totalTextHeight = totalTextHeight + frameHeight
-            end
+        end
+        else
+            -- If there are no instances, display a message
+            labelFrame:Hide()
+            local noInstancesText = ScyllaInstanceSectionFrame:CreateFontString(nil, "OVERLAY")
+            noInstancesText:SetFontObject("GameFontHighlight")
+            noInstancesText:SetText("No lockouts")
+            noInstancesText:SetPoint("CENTER", ScyllaInstanceSectionFrame, "CENTER", 0, 0)
+            noInstancesText:SetTextColor(1, 1, 1)  -- Set the text color to white
         end
         ScyllaInstanceSectionFrame:SetHeight(totalTextHeight + 2 * margin+30)
     end
@@ -75,7 +83,6 @@ function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
     baseFrame:SetScript("OnEvent", function(self, event, ...)
         if event == "UPDATE_INSTANCE_INFO" then
             UpdateInstanceSection()
-            print("updated instances")
         end
     end)
 
