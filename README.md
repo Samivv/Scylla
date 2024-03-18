@@ -24,6 +24,7 @@ The addon automatically runs when you log into the game. It will display a frame
 The addon is composed of several Lua files, each responsible for a different part of the addon:
 
 - Divider.lua: Creates dividers in the addon's frame.
+- Reputations.lua: Handles displaying reputations
 - Footer.lua: Handles the creation of the footer section.
 - Currencies.lua: Manages the display of currencies.
 - FrameCreation.lua: Responsible for creating the main frame of the addon.
