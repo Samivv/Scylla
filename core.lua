@@ -20,10 +20,10 @@ end
 
 -- run main after UPDATE_INSTANCE_INFO
 local frame = CreateFrame("FRAME", "ScyllaFrame")
-frame:RegisterEvent("UPDATE_INSTANCE_INFO")
+frame:RegisterEvent("VARIABLES_LOADED")
 frame:SetScript("OnEvent", function(self, event)
-  if event == "UPDATE_INSTANCE_INFO" then
+  if event == "VARIABLES_LOADED" then
     Main()
-    frame:UnregisterEvent("UPDATE_INSTANCE_INFO")
+    frame:UnregisterEvent("VARIABLES_LOADED")
   end
 end)
