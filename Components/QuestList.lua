@@ -106,6 +106,7 @@ function CreateQuestList(baseFrame, baseFrameWidth, baseFrameHeight)
             if(event == "GOSSIP_SHOW") then
                 UpdateCurrentWeekly()
                 UpdateQuests()
+                frame:UnregisterEvent("GOSSIP_SHOW")
             end
         end
     end)

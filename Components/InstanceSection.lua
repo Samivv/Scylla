@@ -12,11 +12,15 @@ function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
     local labelTexts = {"Kills", "Name", "Difficulty"}
     local labelFrame = CreateLabelFrame(ScyllaInstanceSectionFrame, baseFrameWidth, labelTexts)
     
+    
     local noInstancesText = ScyllaInstanceSectionFrame:CreateFontString(nil, "OVERLAY")
     noInstancesText:SetFontObject("GameFontHighlight")
     noInstancesText:SetText("No lockouts")
     noInstancesText:SetPoint("CENTER", ScyllaInstanceSectionFrame, "CENTER", 0, 0)
     noInstancesText:SetTextColor(1, 1, 1)  -- Set the text color to white
+
+    local frames = {}
+    local texts = {}
 
     local function UpdateInstanceSection()
         local numInstances = GetNumSavedInstances()
@@ -25,14 +29,14 @@ function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
         local frameWidth = ScyllaInstanceSectionFrame:GetWidth()
         local sectionWidth = frameWidth / 3
         local frameHeight = 30  -- Set this to the desired height of each frame
-        local frames = {}
 
+        -- Hide all frames and text labels
         for _, frame in ipairs(frames) do
             frame:Hide()
         end
-        wipe(frames)
-
-
+        for _, text in ipairs(texts) do
+            text:SetText("")
+        end
 
         if numInstances > 0 then
             labelFrame:Show()
@@ -46,37 +50,60 @@ function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
                     numEncounters = numEncounters,
                     encounterProgress = encounterProgress
                 }
-                local frame = CreateHoverableFrame(ScyllaInstanceSectionFrame, frameWidth, frameHeight)
 
-                local text1 = CreateTextLabel(frame, "GameFontHighlight", instanceInfo[index].encounterProgress.."/"..instanceInfo[index].numEncounters, sectionWidth, "LEFT", frame, "LEFT", 0, 0, {1, 1, 1})
-                local text2 = CreateTextLabel(frame, "GameFontHighlight", instanceInfo[index].name, sectionWidth, "LEFT", text1, "RIGHT", 0, 0, {1, 1, 1})
-                local text3 = CreateTextLabel(frame, "GameFontHighlight", instanceInfo[index].difficulty, sectionWidth, "LEFT", text2, "RIGHT", 0, 0, {1, 1, 1})
-            
-                text3:SetTextColor(1, 1, 1)  -- Set the text color to white
+                -- Reuse or create a new frame
+                local frame = frames[index]
+                if not frame then
+                    frame = CreateHoverableFrame(ScyllaInstanceSectionFrame, frameWidth, frameHeight)
+                    table.insert(frames, frame)
+                end
+                frame:Show()
 
-                --Help clearing the text on update.
-                table.insert(frames, text1)
-                table.insert(frames, text2)
-                table.insert(frames, text3)
+                -- Reuse or create new text labels
+                local text1 = texts[index * 3 - 2]
+                if not text1 then
+                    text1 = CreateTextLabel(frame, "GameFontHighlight", "", sectionWidth, "LEFT", frame, "LEFT", 0, 0, {1, 1, 1})
+                    table.insert(texts, text1)
+                end
+                text1:SetText(instanceInfo[index].encounterProgress.."/"..instanceInfo[index].numEncounters)
+                text1:Show()
 
+                local text2 = texts[index * 3 - 1]
+                if not text2 then
+                    text2 = CreateTextLabel(frame, "GameFontHighlight", "", sectionWidth, "LEFT", text1, "RIGHT", 0, 0, {1, 1, 1})
+                    table.insert(texts, text2)
+                end
+                text2:SetText(instanceInfo[index].name)
+                text2:Show()
+
+                local text3 = texts[index * 3]
+                if not text3 then
+                    text3 = CreateTextLabel(frame, "GameFontHighlight", "", sectionWidth, "LEFT", text2, "RIGHT", 0, 0, {1, 1, 1})
+                    table.insert(texts, text3)
+                end
+                text3:SetText(instanceInfo[index].difficulty)
+                text3:Show()
 
                 frame:SetPoint("TOPLEFT", labelFrame, "BOTTOMLEFT", 0, -totalTextHeight)
                 noInstancesText:Hide()
-                table.insert(frames, frame)
                 totalTextHeight = totalTextHeight + frameHeight
-        end
+            end
         else
             -- If there are no instances, display a message
             labelFrame:Hide()
             noInstancesText:Show()
         end
-        ScyllaInstanceSectionFrame:SetHeight(totalTextHeight + 2 * margin+30)
+        ScyllaInstanceSectionFrame:SetHeight(totalTextHeight +30)
     end
 
-    baseFrame:RegisterEvent("UPDATE_INSTANCE_INFO")
-    baseFrame:SetScript("OnEvent", function(self, event, ...)
+    ScyllaInstanceSectionFrame:RegisterEvent("UPDATE_INSTANCE_INFO")
+    ScyllaInstanceSectionFrame:RegisterEvent("ENCOUNTER_END")
+    ScyllaInstanceSectionFrame:SetScript("OnEvent", function(self, event, ...)
         if event == "UPDATE_INSTANCE_INFO" then
             UpdateInstanceSection()
+        elseif event == "ENCOUNTER_END" then
+            -- Request updated instance information after a boss kill
+            RequestRaidInfo()
         end
     end)
 

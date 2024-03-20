@@ -1,7 +1,7 @@
 function CreateBaseFrame()
     local baseFrame = CreateFrame("Frame", "Scylla", UIParent)
-    
     baseFrame:SetSize(GetScreenWidth() * 0.2, GetScreenHeight() * 0.03)
+    
     local width = baseFrame:GetWidth()
     local height = baseFrame:GetHeight()
     baseFrame:SetPoint("CENTER")
@@ -44,7 +44,7 @@ function CreateBaseFrame()
     local title = baseFrame:CreateFontString(nil, "OVERLAY")
     local titleBG = baseFrame:CreateTexture(nil, "BACKGROUND")
     titleBG:SetAllPoints(title)
-    titleBG:SetColorTexture(1, 0, 0, 0.5) -- RGBA for red with 50% opacity
+    titleBG:SetColorTexture(1, 0, 0, 0.5) -- RGBA for dark red with 50% opacity
     title:SetSize(width, height)
     title:SetFontObject("GameFontHighlightLarge")
     title:SetPoint("TOP", baseFrame, "TOP", 0, 0)
@@ -113,6 +113,17 @@ function CreateBorderBottom(baseFrame)
 end
 -- local borderBottom = CreateBorderBottom(myFrame)
 
+-- Helper function to create a text label
+function CreateTextLabel(parent, fontObject, text, width, point, relativeTo, relativePoint, offsetX, offsetY, textColor)
+    local label = parent:CreateFontString(nil, "OVERLAY")
+    label:SetFontObject(fontObject)
+    label:SetText(text)
+    label:SetWidth(width)
+    label:SetPoint(point, relativeTo, relativePoint, offsetX, offsetY)
+    label:SetTextColor(unpack(textColor))
+
+    return label
+end
 
 function CreateLabelFrame(parentFrame, frameWidth, labels)
     -- Create a frame for the labels
@@ -121,14 +132,11 @@ function CreateLabelFrame(parentFrame, frameWidth, labels)
     labelFrame:SetPoint("TOPLEFT", parentFrame, "TOPLEFT", 0, 0)
     local borderBottom = CreateBorderBottom(labelFrame)
 
+
+
     -- Create labels
     for i, labelText in ipairs(labels) do
-        local label = labelFrame:CreateFontString(nil, "OVERLAY")
-        label:SetFontObject("GameFontHighlight")
-        label:SetText(labelText)
-        label:SetWidth(frameWidth / #labels)
-        label:SetPoint("LEFT", labelFrame, "LEFT", (i - 1) * frameWidth / #labels, 0)
-        label:SetTextColor(1, 1, 1)  -- Set the text color to white
+        local label = CreateTextLabel(labelFrame, "GameFontHighlight", labelText, frameWidth / #labels, "LEFT", labelFrame, "LEFT", (i - 1) * frameWidth / #labels, 0, {1, 1, 1})
     end
 
     return labelFrame
@@ -138,13 +146,3 @@ end
 --local labelFrame = CreateLabelFrame(ScyllaInstanceSectionFrame, baseFrameWidth, labelTexts)
 
 
--- Helper function to create a text label
-function CreateTextLabel(parent, fontObject, text, width, point, relativeTo, relativePoint, offsetX, offsetY, textColor)
-    local label = parent:CreateFontString(nil, "OVERLAY")
-    label:SetFontObject(fontObject)
-    label:SetText(text)
-    label:SetWidth(width)
-    label:SetPoint(point, relativeTo, relativePoint, offsetX, offsetY)
-    label:SetTextColor(unpack(textColor))
-    return label
-end
