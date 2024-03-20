@@ -1,9 +1,13 @@
 function CreateQuestList(baseFrame, baseFrameWidth, baseFrameHeight)
-    local questIDList = {78752, 78753, 24584}
+    if not currentWeekly then
+        currentWeekly = 24586 
+        -- default into a razorscale weekly  if not a saved variable already.
+    end
+    local questIDList = {78752, 78753, currentWeekly}
     local questList = {"Daily Gamma", "Daily HC", "Weekly"}
     local labelTexts = {"Completed", "Name", "IsOnQuest?"}
     local margin = 10
-
+    
     local ScyllaQuestsSectionFrame = CreateFrame("Frame", "ScyllaQuestsSectionFrame", baseFrame)
     ScyllaQuestsSectionFrame:SetWidth(baseFrameWidth)
     ScyllaQuestsSectionFrame:SetPoint("TOP", baseFrame, "BOTTOM", 0, 0)
@@ -59,6 +63,7 @@ function CreateQuestList(baseFrame, baseFrameWidth, baseFrameHeight)
         }
     end
     function UpdateQuests()
+        questIDList = {78752, 78753, currentWeekly}
         for i, questData in ipairs(questFrames) do
             local isCompleted = C_QuestLog.IsQuestFlaggedCompleted(questIDList[i])
             local isOnQuest = C_QuestLog.IsOnQuest(questIDList[i])
@@ -82,6 +87,43 @@ function CreateQuestList(baseFrame, baseFrameWidth, baseFrameHeight)
             end)
         end
     end
+
+    local function UpdateCurrentWeekly()
+        local gossip = C_GossipInfo.GetAvailableQuests()
+        if not gossip then
+            return
+        end
+        for i, quest in ipairs(gossip) do
+            -- print("Quest " .. i .. ":")
+            -- for k, v in pairs(quest) do
+            --    print(k..":"..tostring(v))
+            -- end
+            if quest.frequency == 2 then
+                if currentWeekly ~= quest.questID then
+                    currentWeekly = quest.questID
+                    print("|cFFFF0000[S C Y L L A]|r: Updated weekly quest")
+                end
+            end
+         end
+    end
+    
+    local frame = CreateFrame("Frame")
+    frame:RegisterEvent("GOSSIP_SHOW")
+    
+    -- Create an event handler function
+    frame:SetScript("OnEvent", function(self, event)
+        local npc = UnitGUID("npc")
+        local npcID
+        if (npc) then
+            _, _, _, _, _, npcID = strsplit("-", npc);
+        end
+        if npcID == "20735" then
+            if(event == "GOSSIP_SHOW") then
+                UpdateCurrentWeekly()
+                UpdateQuests()
+            end
+        end
+    end)
 
     ScyllaQuestsSectionFrame:RegisterEvent("QUEST_LOG_UPDATE")
 
