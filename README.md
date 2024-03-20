@@ -9,6 +9,11 @@ Scylla is a World of Warcraft(WOTLK) addon that displays information about your 
 - Provides a currency display
 - Reputations display
 
+## Preview
+![image](https://github.com/Samivv/Scylla/assets/101732172/e3d36d63-5888-4e63-ba30-bb3a7459b50c)
+
+
+
 ## Installation
 
 1. Download the latest version of the addon from the GitHub repository.
