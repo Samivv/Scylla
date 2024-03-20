@@ -11,6 +11,9 @@ Scylla is a World of Warcraft(WOTLK) addon that displays information about your 
 
 ## Preview
 ![image](https://github.com/Samivv/Scylla/assets/101732172/e3d36d63-5888-4e63-ba30-bb3a7459b50c)
+![WowClassic_heDVklWlOR](https://github.com/Samivv/Scylla/assets/101732172/076a6c3c-e5d2-4ff5-b608-7ef580c03935)
+- in questlist hover effect helps clear out status. Green for completed, yellow for in progress, red if neither are true.
+
 
 
 
