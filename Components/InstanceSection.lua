@@ -48,23 +48,10 @@ function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
                 }
                 local frame = CreateHoverableFrame(ScyllaInstanceSectionFrame, frameWidth, frameHeight)
 
-                local text1 = frame:CreateFontString(nil, "OVERLAY")
-                text1:SetFontObject("GameFontHighlight")
-                text1:SetText(instanceInfo[index].encounterProgress.."/"..instanceInfo[index].numEncounters)
-                text1:SetWidth(sectionWidth)
-                text1:SetPoint("LEFT", frame, "LEFT", 0, 0) 
-                text1:SetTextColor(1, 1, 1)  -- Set the text color to white
-                local text2 = frame:CreateFontString(nil, "OVERLAY")
-                text2:SetFontObject("GameFontHighlight")
-                text2:SetText(instanceInfo[index].name)
-                text2:SetWidth(sectionWidth)
-                text2:SetPoint("LEFT", text1, "RIGHT", 0, 0)
-                text2:SetTextColor(1, 1, 1)  -- Set the text color to white
-                local text3 = frame:CreateFontString(nil, "OVERLAY")
-                text3:SetFontObject("GameFontHighlight")
-                text3:SetText(instanceInfo[index].difficulty)
-                text3:SetWidth(sectionWidth)
-                text3:SetPoint("LEFT", text2, "RIGHT", 0, 0)
+                local text1 = CreateTextLabel(frame, "GameFontHighlight", instanceInfo[index].encounterProgress.."/"..instanceInfo[index].numEncounters, sectionWidth, "LEFT", frame, "LEFT", 0, 0, {1, 1, 1})
+                local text2 = CreateTextLabel(frame, "GameFontHighlight", instanceInfo[index].name, sectionWidth, "LEFT", text1, "RIGHT", 0, 0, {1, 1, 1})
+                local text3 = CreateTextLabel(frame, "GameFontHighlight", instanceInfo[index].difficulty, sectionWidth, "LEFT", text2, "RIGHT", 0, 0, {1, 1, 1})
+            
                 text3:SetTextColor(1, 1, 1)  -- Set the text color to white
 
                 --Help clearing the text on update.

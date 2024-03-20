@@ -30,28 +30,13 @@ function CreateQuestList(baseFrame, baseFrameWidth, baseFrameHeight)
         local bgTexture = questFrame:CreateTexture(nil, "BACKGROUND")
         bgTexture:SetAllPoints(questFrame)
         -- Create the quest status label
-        local statusLabel = questFrame:CreateFontString(nil, "OVERLAY")
-        statusLabel:SetFontObject("GameFontHighlight")
-        statusLabel:SetText(C_QuestLog.IsQuestFlaggedCompleted(questIDList[i]) and "+" or "-")
-        statusLabel:SetWidth(baseFrameWidth / 3)
-        statusLabel:SetPoint("CENTER", questFrame, "CENTER", -(baseFrameWidth / 3), 0) -- Position it at the center of the quest frame
-        statusLabel:SetTextColor(1, 1, 1)  -- Set the text color to white
+        local statusLabel = CreateTextLabel(questFrame, "GameFontHighlight", C_QuestLog.IsQuestFlaggedCompleted(questIDList[i]) and "+" or "-", baseFrameWidth / 3, "CENTER", questFrame, "CENTER", -(baseFrameWidth / 3), 0, {1, 1, 1})
 
         -- Create the quest name label
-        local nameLabel = questFrame:CreateFontString(nil, "OVERLAY")
-        nameLabel:SetFontObject("GameFontHighlight")
-        nameLabel:SetText(quest)
-        nameLabel:SetWidth(baseFrameWidth / 3)
-        nameLabel:SetPoint("CENTER", questFrame, "CENTER", 0, 0) -- Position it at the center of the quest frame
-        nameLabel:SetTextColor(1, 1, 1)  -- Set the text color to white
+        local nameLabel = CreateTextLabel(questFrame, "GameFontHighlight", quest, baseFrameWidth / 3, "CENTER", questFrame, "CENTER", 0, 0, {1, 1, 1})
 
         -- Create the quest active label
-        local activeLabel = questFrame:CreateFontString(nil, "OVERLAY")
-        activeLabel:SetFontObject("GameFontHighlight")
-        activeLabel:SetText(C_QuestLog.IsOnQuest(questIDList[i]) and "Yes" or "No")
-        activeLabel:SetWidth(baseFrameWidth / 3)
-        activeLabel:SetPoint("CENTER", questFrame, "CENTER", baseFrameWidth / 3, 0) -- Position it at the center of the quest frame
-        activeLabel:SetTextColor(1, 1, 1)  -- Set the text color to white
+        local activeLabel = CreateTextLabel(questFrame, "GameFontHighlight", C_QuestLog.IsOnQuest(questIDList[i]) and "Yes" or "No", baseFrameWidth / 3, "CENTER", questFrame, "CENTER", baseFrameWidth / 3, 0, {1, 1, 1})
             
         ScyllaQuestsSectionFrame:SetHeight(ScyllaQuestsSectionFrame:GetHeight()+questFrame:GetHeight()+margin)
         questFrames[i] = {

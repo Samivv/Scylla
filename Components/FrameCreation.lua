@@ -136,3 +136,15 @@ end
 
 --local labelTexts = {"Kills", "Name", "Difficulty"}
 --local labelFrame = CreateLabelFrame(ScyllaInstanceSectionFrame, baseFrameWidth, labelTexts)
+
+
+-- Helper function to create a text label
+function CreateTextLabel(parent, fontObject, text, width, point, relativeTo, relativePoint, offsetX, offsetY, textColor)
+    local label = parent:CreateFontString(nil, "OVERLAY")
+    label:SetFontObject(fontObject)
+    label:SetText(text)
+    label:SetWidth(width)
+    label:SetPoint(point, relativeTo, relativePoint, offsetX, offsetY)
+    label:SetTextColor(unpack(textColor))
+    return label
+end
