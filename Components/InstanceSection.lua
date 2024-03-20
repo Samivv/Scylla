@@ -11,7 +11,12 @@ function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
 
     local labelTexts = {"Kills", "Name", "Difficulty"}
     local labelFrame = CreateLabelFrame(ScyllaInstanceSectionFrame, baseFrameWidth, labelTexts)
-
+    
+    local noInstancesText = ScyllaInstanceSectionFrame:CreateFontString(nil, "OVERLAY")
+    noInstancesText:SetFontObject("GameFontHighlight")
+    noInstancesText:SetText("No lockouts")
+    noInstancesText:SetPoint("CENTER", ScyllaInstanceSectionFrame, "CENTER", 0, 0)
+    noInstancesText:SetTextColor(1, 1, 1)  -- Set the text color to white
 
     local function UpdateInstanceSection()
         local numInstances = GetNumSavedInstances()
@@ -26,6 +31,8 @@ function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
             frame:Hide()
         end
         wipe(frames)
+
+
 
         if numInstances > 0 then
             labelFrame:Show()
@@ -47,14 +54,12 @@ function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
                 text1:SetWidth(sectionWidth)
                 text1:SetPoint("LEFT", frame, "LEFT", 0, 0) 
                 text1:SetTextColor(1, 1, 1)  -- Set the text color to white
-
                 local text2 = frame:CreateFontString(nil, "OVERLAY")
                 text2:SetFontObject("GameFontHighlight")
                 text2:SetText(instanceInfo[index].name)
                 text2:SetWidth(sectionWidth)
                 text2:SetPoint("LEFT", text1, "RIGHT", 0, 0)
                 text2:SetTextColor(1, 1, 1)  -- Set the text color to white
-
                 local text3 = frame:CreateFontString(nil, "OVERLAY")
                 text3:SetFontObject("GameFontHighlight")
                 text3:SetText(instanceInfo[index].difficulty)
@@ -62,19 +67,21 @@ function CreateInstanceSection(baseFrame, baseFrameWidth, baseFrameHeight)
                 text3:SetPoint("LEFT", text2, "RIGHT", 0, 0)
                 text3:SetTextColor(1, 1, 1)  -- Set the text color to white
 
-                frame:SetPoint("TOPLEFT", labelFrame, "BOTTOMLEFT", 0, -totalTextHeight)
+                --Help clearing the text on update.
+                table.insert(frames, text1)
+                table.insert(frames, text2)
+                table.insert(frames, text3)
 
+
+                frame:SetPoint("TOPLEFT", labelFrame, "BOTTOMLEFT", 0, -totalTextHeight)
+                noInstancesText:Hide()
                 table.insert(frames, frame)
                 totalTextHeight = totalTextHeight + frameHeight
         end
         else
             -- If there are no instances, display a message
             labelFrame:Hide()
-            local noInstancesText = ScyllaInstanceSectionFrame:CreateFontString(nil, "OVERLAY")
-            noInstancesText:SetFontObject("GameFontHighlight")
-            noInstancesText:SetText("No lockouts")
-            noInstancesText:SetPoint("CENTER", ScyllaInstanceSectionFrame, "CENTER", 0, 0)
-            noInstancesText:SetTextColor(1, 1, 1)  -- Set the text color to white
+            noInstancesText:Show()
         end
         ScyllaInstanceSectionFrame:SetHeight(totalTextHeight + 2 * margin+30)
     end

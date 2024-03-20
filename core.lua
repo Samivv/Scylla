@@ -9,6 +9,18 @@
 --   local reputationFrame = CreateReputationsFrame(dockerFrame4,width,height)
 --   CreateSlashCommand(baseFrame)
 -- end
+local baseLayout = {
+  {name = "baseFrame", parent = nil}, -- has to stay default
+  {name = "dockerFrame1", parent = "baseFrame"},
+  {name = "QuestList", parent = "dockerFrame1"},
+  {name = "dockerFrame2", parent = "QuestList"},
+  {name = "instanceSection", parent = "dockerFrame2"},
+  {name = "dockerFrame4", parent = "instanceSection"},
+  {name = "reputationFrame", parent = "dockerFrame4"},
+  {name = "footer", parent = "reputationFrame"},
+  {name = "currencyDisplay", parent = "footer"},
+}
+
 
 function Main()
   local status, err = pcall(function()

@@ -37,8 +37,8 @@ function CreateFooter(baseFrame, baseFrameWidth, baseFrameHeight)
             weeklyTimeText = weeklyHours .. "h " .. weeklyMinutes .. "m"
         end
 
-        footerText1:SetText("Daily reset in " .. dailyHours .. "h " .. dailyMinutes .. "m")
-        footerText2:SetText("Weekly reset in " .. weeklyTimeText)
+        footerText2:SetText("Daily reset in " .. dailyHours .. "h " .. dailyMinutes .. "m")
+        footerText1:SetText("Weekly reset in " .. weeklyTimeText)
 
         local textHeight1 = footerText1:GetStringHeight()
         local textHeight2 = footerText2:GetStringHeight()

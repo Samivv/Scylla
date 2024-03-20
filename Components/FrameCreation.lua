@@ -75,6 +75,7 @@ function ApplyBG(x)
     return bg
 end
 
+-- add ccolor options to this {}
 function CreateHoverableFrame(parent, width, height)
     local frame = CreateFrame("Frame", nil, parent)
     frame:SetSize(width, height)
