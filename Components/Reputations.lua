@@ -1,5 +1,7 @@
 function CreateReputationsFrame(baseFrame, baseFrameWidth, baseFrameHeight)
-    local trackedReputations = 
+    local reputationTextFrames = {}
+
+    local trackedReputations =
     {
         {name= "The Ashen Verdict", id=1156},
         {name= "Argent Crusade", id=1106},
@@ -27,26 +29,18 @@ function CreateReputationsFrame(baseFrame, baseFrameWidth, baseFrameHeight)
         text1:SetText(item.name)
         text1:SetPoint("CENTER", frame, "CENTER", 0, frameHeight / 4) 
         text1:SetTextColor(1, 1, 1)  -- Set the text color to white
-    
-        local _, _, standingID, barMin, barMax, barValue = GetFactionInfoByID(item.id)
-        local currentReputation = barValue - barMin
-        local nextRankReputation = barMax - barMin
         
         local text2 = frame:CreateFontString(nil, "OVERLAY")
         text2:SetFontObject("AchievementDateFont")
         text2:SetPoint("CENTER", frame, "CENTER", 0, -frameHeight / 4)
         text2:SetTextColor(1, 1, 1)  -- Set the text color to white
+        table.insert(reputationTextFrames, {textFrame = text2, id = item.id})
         
-        if currentReputation == nextRankReputation-1 then
-            text2:SetText("Exalted")
-            text2:SetTextColor(1,0,0)
-        else
-            text2:SetText(currentReputation .. "/" .. nextRankReputation)
-        end
+        
         
         local row = math.floor((index - 1) / 3)
         local col = (index - 1) % 3
-    
+        
         if row == 0 and col == 0 then
             frame:SetPoint("TOPLEFT", reputationsFrame, "TOPLEFT", 0, 0)
         elseif row == 0 then
@@ -54,11 +48,33 @@ function CreateReputationsFrame(baseFrame, baseFrameWidth, baseFrameHeight)
         else
             frame:SetPoint("TOPLEFT", frames[index - 3], "BOTTOMLEFT", 0, 0)
         end
-    
+        
         table.insert(frames, frame)
     end
     
     reputationsFrame:SetHeight(frameHeight * math.ceil(#trackedReputations / 3))
     
+    function UpdateReputations()
+        for _, item in ipairs(reputationTextFrames) do
+            local _, _, standingID, barMin, barMax, barValue = GetFactionInfoByID(item.id)
+            local currentReputation = barValue - barMin
+            local nextRankReputation = barMax - barMin
+    
+            if currentReputation == nextRankReputation-1 then
+                item.textFrame:SetText("Exalted")
+                item.textFrame:SetTextColor(1,0,0)
+            else
+                item.textFrame:SetText(currentReputation .. "/" .. nextRankReputation)
+            end
+        end
+    end
+    reputationsFrame:SetScript("OnEvent", function(self, event, ...)
+        if event == "UPDATE_FACTION" then
+            UpdateReputations()
+        end
+    end)
+    reputationsFrame:RegisterEvent("UPDATE_FACTION")
+    
+    UpdateReputations()
     return reputationsFrame
 end
