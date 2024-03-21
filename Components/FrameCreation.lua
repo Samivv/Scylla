@@ -63,7 +63,6 @@ function CreateBaseFrame()
         end
     end)
     baseFrame:SetPropagateKeyboardInput(true)
-
     return baseFrame, width, height
 end
 
@@ -155,5 +154,3 @@ end
 
 --local labelTexts = {"Kills", "Name", "Difficulty"}
 --local labelFrame = CreateLabelFrame(ScyllaInstanceSectionFrame, baseFrameWidth, labelTexts)
-
-

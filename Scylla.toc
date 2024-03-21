@@ -5,6 +5,7 @@
 ## Notes: Displays information about your daily quests and lockouts.
 ## SavedVariables: currentWeekly
 
+Components/CharacterFrameButton.lua
 Components/Reputations.lua
 Components/Divider.lua
 Components/Footer.lua
