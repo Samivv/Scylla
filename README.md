@@ -1,4 +1,4 @@
-# Scylla - WotLK Planning Addon
+# Scylla - WotLK Daily Tracker addon
 
 Scylla is a World of Warcraft (Wrath of the Lich King Classic) addon designed to showcase instant overviews of essential in-game information for efficient planning.
 
