@@ -2,6 +2,12 @@
 
 Scylla is a World of Warcraft (Wrath of the Lich King Classic) addon designed to showcase instant overviews of essential in-game information for efficient planning.
 
+The addon was built with scalability  in mind.
+For now it requires a little bit of tinkering in the lua files to add your own tracked quests, but the goal is to turn it into an interface option.
+
+Originally built this for my own use, but I hope to build on it if it reaches interest of more players.
+
+
 ## Features
 
 Daily Quest Tracker: Never miss a daily with Scylla's clear display.
