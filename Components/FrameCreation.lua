@@ -48,21 +48,17 @@ function CreateBaseFrame()
     title:SetSize(width, height)
     title:SetFontObject("GameFontHighlightLarge")
     title:SetPoint("TOP", baseFrame, "TOP", 0, 0)
-    -- title:SetText(UnitName("player").."'s Dailies")
     title:SetText("S C Y L L A")
     
     local borderBottom = CreateBorderBottom(baseFrame)
+
 
     baseFrame:SetScript("OnKeyDown", function(self, key)
         if key == "ESCAPE" then
             print("|cFFFF0000[S C Y L L A]|r: Hiding frame. |cFFFF0000/scylla|r to show again")
             self:Hide()
-            self:SetPropagateKeyboardInput(false)
-        else
-            self:SetPropagateKeyboardInput(true)
         end
     end)
-    baseFrame:SetPropagateKeyboardInput(true)
     return baseFrame, width, height
 end
 
