@@ -1,6 +1,6 @@
-# Scylla - Your Ultimate WotLK Planning Addon
+# Scylla - WotLK Planning Addon
 
-Scylla is a World of Warcraft (Wrath of the Lich King Classic) addon designed to streamline your daily play sessions. Get instant overviews of essential in-game information for efficient planning.
+Scylla is a World of Warcraft (Wrath of the Lich King Classic) addon designed to showcase instant overviews of essential in-game information for efficient planning.
 
 ## Features
 
@@ -32,19 +32,14 @@ Place the extracted folder in: World of Warcraft/_classic_/Interface/AddOns
 ## Usage
 
 Scylla launches automatically upon login, presenting a frame with your daily quests, instance lockouts, and currencies.
+/scylla or button from character info screen will open the frame back up after closing.
 
 ## Contributing
-
-Want to help? We'd love your contributions!
 
 Fork this repository.
 Make your awesome changes.
 Submit a pull request.
-## License
-
-Scylla is proudly licensed under the MIT License.
-
-
+(Please report any bugs!)
 
 
 
