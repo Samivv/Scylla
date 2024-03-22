@@ -12,8 +12,12 @@ Reputation Status: Monitor your reputation progress with key factions.
 
 See Scylla in action:
 
-Image 1: https://github.com/Samivv/Scylla/assets/101732172/e3d36d63-5888-4e63-ba30-bb3a7459b50c
-Image 2: https://github.com/Samivv/Scylla/assets/101732172/076a6c3c-e5d2-4ff5-b608-7ef580c03935
+Preview 1:
+![image](https://github.com/Samivv/Scylla/assets/101732172/e3d36d63-5888-4e63-ba30-bb3a7459b50c)
+
+
+Preview 2: ![image](https://github.com/Samivv/Scylla/assets/101732172/076a6c3c-e5d2-4ff5-b608-7ef580c03935)
+
 Hover Effects:  Scylla's intuitive hover effects in the quest list provide clear status updates:
 
 Green: Completed
