@@ -6,8 +6,9 @@ Scylla is a World of Warcraft (Wrath of the Lich King Classic) addon designed to
 
 Daily Quest Tracker: Never miss a daily with Scylla's clear display.
 Instance Lockouts: Stay on top of your raid resets and dungeon availability.
-Currency Overview: Effortlessly track gold, emblems, and other important currencies.
+Currency Overview: Effortlessly track emblems
 Reputation Status: Monitor your reputation progress with key factions.
+
 ## Preview
 
 See Scylla in action:
