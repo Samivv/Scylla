@@ -12,8 +12,8 @@ function CreateDivider(parentFrame, width, height, text)
     
     local textBG = divider:CreateTexture(nil, "BACKGROUND")
     textBG:SetAllPoints(title)
-    textBG:SetColorTexture(1, 0, 0, 0.5) -- RGBA for red with 50% opacity
     local bg = ApplyBG(divider)
+    textBG:SetColorTexture(1, 0, 0, 0.5) -- RGBA for red with 50% opacity
 
     
     

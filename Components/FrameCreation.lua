@@ -1,9 +1,9 @@
 function CreateBaseFrame()
     local baseFrame = CreateFrame("Frame", "Scylla", UIParent)
-    baseFrame:SetSize(GetScreenWidth() * 0.2, GetScreenHeight() * 0.03)
+    local width = GetScreenWidth() * 0.2
+    local height = GetScreenHeight() * 0.03
+    baseFrame:SetSize(width, height )
     
-    local width = baseFrame:GetWidth()
-    local height = baseFrame:GetHeight()
     baseFrame:SetPoint("CENTER")
     baseFrame:SetMovable(true)
     baseFrame:EnableMouse(true)
@@ -59,6 +59,7 @@ function CreateBaseFrame()
             self:Hide()
         end
     end)
+    baseFrame:SetPropagateKeyboardInput(true)
     return baseFrame, width, height
 end
 
