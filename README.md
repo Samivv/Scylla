@@ -1,50 +1,60 @@
-# Scylla
+# Scylla - WotLK Daily Tracker addon
 
-Scylla is a World of Warcraft(WOTLK) addon that displays information about your character in a clean and fast way to help plan out your adventures for the session.
+Scylla is a World of Warcraft (Wrath of the Lich King Classic) addon designed to showcase instant overviews of essential in-game information for efficient planning.
+
+The addon was built with scalability  in mind.
+For now it requires a little bit of tinkering in the lua files to add your own tracked quests, but the goal is to turn it into an interface option.
+
+Originally built this for my own use, but I hope to build on it if it reaches interest of more players.
+
 
 ## Features
 
-- Displays daily quests
-- Shows instance lockouts
-- Provides a currency display
-- Reputations display
+Daily Quest Tracker: Never miss a daily with Scylla's clear display.
+Instance Lockouts: Stay on top of your raid resets and dungeon availability.
+Currency Overview: Effortlessly track emblems
+Reputation Status: Monitor your reputation progress with key factions.
 
 ## Preview
+
+See Scylla in action:
+
+Preview 1:
 ![image](https://github.com/Samivv/Scylla/assets/101732172/e3d36d63-5888-4e63-ba30-bb3a7459b50c)
-![WowClassic_heDVklWlOR](https://github.com/Samivv/Scylla/assets/101732172/076a6c3c-e5d2-4ff5-b608-7ef580c03935)
-- in questlist hover effect helps clear out status. Green for completed, yellow for in progress, red if neither are true.
 
 
+Preview 2: 
+![image](https://github.com/Samivv/Scylla/assets/101732172/076a6c3c-e5d2-4ff5-b608-7ef580c03935)
 
+Hover Effects:  Scylla's intuitive hover effects in the quest list provide clear status updates:
 
+Green: Completed
+Yellow: In Progress
+Red: Not Started
 ## Installation
 
-1. Download the latest version of the addon from the GitHub repository.
-2. Extract the downloaded zip file.
-3. Copy the extracted folder to your `World of Warcraft/_classic_/Interface/AddOns` directory.
-
+Download the latest Scylla version from the GitHub repository.
+Extract the zip file.
+Place the extracted folder in: World of Warcraft/_classic_/Interface/AddOns
 ## Usage
 
-The addon automatically runs when you log into the game. It will display a frame with information about your daily quests, instance lockouts, and currencies.
-
-## Components
-
-The addon is composed of several Lua files, each responsible for a different part of the addon:
-
-- Divider.lua: Creates dividers in the addon's frame.
-- Reputations.lua: Handles displaying reputations
-- Footer.lua: Handles the creation of the footer section.
-- Currencies.lua: Manages the display of currencies.
-- FrameCreation.lua: Responsible for creating the main frame of the addon.
-- QuestList.lua: Handles the creation and management of the quest list.
-- InstanceSection.lua: Manages the display of instance lockouts.
-- SlashCommand.lua: Handles slash commands for the addon.
-- core.lua: The main file that ties all the components together.
+Scylla launches automatically upon login, presenting a frame with your daily quests, instance lockouts, and currencies.
+/scylla or button from character info screen will open the frame back up after closing.
 
 ## Contributing
 
-Contributions are welcome! Please fork the repository and create a pull request with your changes.
+Fork this repository.
+Make your awesome changes.
+Submit a pull request.
+(Please report any bugs!)
 
-## License
 
-This project is licensed under the MIT License.
+
+
+## Find Scylla Easily
+
+world of warcraft daily tracker
+wotlk daily tracker addon
+reputation tracker wotlk
+wotlk instance tracker
+wotlk addon
