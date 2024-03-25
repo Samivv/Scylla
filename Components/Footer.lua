@@ -6,7 +6,7 @@ function CreateFooter(baseFrame, baseFrameWidth, baseFrameHeight)
 
     local footerBG = footerFrame:CreateTexture(nil, "BACKGROUND")
     footerBG:SetAllPoints(footerFrame)
-    footerBG:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+    footerBG:SetColorTexture(0, 0, 0, 0.5)  -- RGBA for semi-transparent black
 
     local footerText1 = footerFrame:CreateFontString(nil, "OVERLAY")
     footerText1:SetFontObject("GameFontHighlight")

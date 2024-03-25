@@ -1,5 +1,6 @@
 -- Characterframe button for easy access
 function CreateCFrameButton(baseFrame,width,height)
+    
     local cfFrame = CreateFrame("Button", "ScyllaCharacterFrameButton", CharacterFrameTab5, "CharacterFrameTabButtonTemplate")
     --Right most tab of the character panel.
     cfFrame:SetPoint("LEFT", CharacterFrameTab5, "RIGHT", -20, 0)  -- Anchor to the right of CharacterFrameTab5

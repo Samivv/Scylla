@@ -14,7 +14,7 @@ function CreateBaseFrame()
     -- Create the background
     local bg = baseFrame:CreateTexture(nil, "BACKGROUND")
     bg:SetAllPoints(baseFrame)
-    bg:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+    bg:SetColorTexture(0, 0, 0, 0.5)  -- RGBA for semi-transparent black
     
     -- Add close button to the frame
     local close = CreateFrame("Button", "ScyllaCloseButton", baseFrame)
@@ -73,8 +73,7 @@ function ApplyBG(x)
         -- Create a new texture for the background
         bg = x:CreateTexture(nil, "BACKGROUND")
         bg:SetAllPoints(x)
-        bg:SetColorTexture(1, 0, 0, 0.5)
-        bg:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Background")
+        bg:SetColorTexture(0, 0, 0, 0.5)  -- RGBA for semi-transparent black
 
         -- Store the background texture in the frame's userdata table
         x.bg = bg
