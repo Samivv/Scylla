@@ -4,13 +4,12 @@ function CreateBaseFrame()
     local height = GetScreenHeight() * 0.03
     baseFrame:SetSize(width, height )
     
-    baseFrame:SetPoint("CENTER")
     baseFrame:SetMovable(true)
     baseFrame:EnableMouse(true)
     baseFrame:RegisterForDrag("LeftButton")
     baseFrame:SetScript("OnDragStart", baseFrame.StartMoving)
     baseFrame:SetScript("OnDragStop", baseFrame.StopMovingOrSizing)
-    
+    baseFrame:SetPoint("CENTER", 0, GetScreenHeight()/2)
     -- Create the background
     local bg = baseFrame:CreateTexture(nil, "BACKGROUND")
     bg:SetAllPoints(baseFrame)
