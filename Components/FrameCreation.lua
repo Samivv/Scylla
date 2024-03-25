@@ -64,20 +64,9 @@ function CreateBaseFrame()
 end
 
 function ApplyBG(x)
-    -- Check if a background texture already exists
-    local bg = x.bg
-    if bg then
-        -- Update the color of the existing texture
-        bg:SetColorTexture(1, 0, 0, 0.5)
-    else
-        -- Create a new texture for the background
-        bg = x:CreateTexture(nil, "BACKGROUND")
-        bg:SetAllPoints(x)
-        bg:SetColorTexture(0, 0, 0, 0.5)  -- RGBA for semi-transparent black
-
-        -- Store the background texture in the frame's userdata table
-        x.bg = bg
-    end
+    local bg = x:CreateTexture(nil, "BACKGROUND")
+    bg:SetAllPoints(x)
+    bg:SetColorTexture(0, 0, 0, 0.5)  -- RGBA for semi-transparent black
     return bg
 end
 
